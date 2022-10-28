@@ -42,3 +42,10 @@ tolerations:
   all: false
   node: []
   controller: []
+
+# DaemonSet update strategy (OnDelete or RollingUpdate as default value)
+# daemonSetUpdateStrategy:
+#   type: "OnDelete"
+#   rollingUpdate:
+#     maxUnavailable: 0
+#     maxSurge: 1

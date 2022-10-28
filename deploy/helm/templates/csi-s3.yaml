@@ -47,6 +47,17 @@ spec:
   selector:
     matchLabels:
       app: csi-s3
+  {{- with .Values.daemonSetUpdateStrategy }}
+  updateStrategy:
+    type: {{ .type }}
+    {{- if eq .type "RollingUpdate" }}
+    {{- with default (dict "maxSurge" 0 "maxUnavailable" 1) .rollingUpdate }}
+    rollingUpdate:
+      maxSurge: {{ .maxSurge }}
+      maxUnavailable: {{ .maxUnavailable }}
+    {{- end }}
+    {{- end }}
+  {{- end }}
   template:
     metadata:
       labels:
